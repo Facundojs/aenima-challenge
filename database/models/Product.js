@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (sequelize, dataTypes) {
     let alias = "Product";
     let cols = {
@@ -9,15 +11,12 @@ module.exports = function (sequelize, dataTypes) {
       },
       name: {
         type: dataTypes.STRING,
-        allowNull: false,
       },
       price: {
         type: dataTypes.DECIMAL,
-        allowNull: false,
       },
       image: {
         type: dataTypes.STRING,
-        allowNull: false,
       },
       description: {
         type: dataTypes.TEXT,
@@ -25,10 +24,9 @@ module.exports = function (sequelize, dataTypes) {
     };
     let config = {
       tableName: "products",
-      timestamps: true,
+      timestamps: false,
       paranoid: false,
     };
     let Product = sequelize.define(alias, cols, config);
     return Product;
   };
-  

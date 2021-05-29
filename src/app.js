@@ -13,6 +13,6 @@ app.listen(DB_PORT, ()=>{
     console.log(`Servidor escuchando en el puerto ${DB_PORT}`)
 });
 
-const router = require('./router')
+const router = require('./router');
 
-app.use('/api/v1/products', router)
+app.use('/api/v1/products', router);

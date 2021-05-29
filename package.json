@@ -1,4 +1,31 @@
 {
+  "name": "aenima-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startdev": "nodemon src/app.js -e js json",
+    "start": "nodemon src/app.js",
+    "create-db": "sequelize db:create",
+    "migrate-db": "sequelize db:migrate",
+    "seed-db": "sequelize db:seed:all",
+    "drop-db": "sequelize db:drop",
+    "reset-db": "npm-run-all drop-db create-db migrate-db seed-db",
+    "install-project": "npm-run-all create-db migrate-db seed-db start",
+    "reinstall-project": "npm-run-all drop-db create-db migrate-db seed-db start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Facundojs/aenima-challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Facundojs/aenima-challenge/issues"
+  },
+  "homepage": "https://github.com/Facundojs/aenima-challenge#readme",
+  "description": "",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -7,6 +34,7 @@
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
     "sequelize": "^6.6.2"
   }
 }

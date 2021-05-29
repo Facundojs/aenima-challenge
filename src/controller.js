@@ -1,7 +1,6 @@
-const db = require('../database/models');
 const { validationResult } = require("express-validator");
-
-const serverError = (error)=>{
+const db = require('../database/models');
+const serverError = (error, res)=>{
     res.json({
         conectionError:{
             msg: "There was an error with db",
@@ -9,48 +8,98 @@ const serverError = (error)=>{
         }
     })
 }
+
 module.exports = {
     all: async (req, res) => {
+        console.log('ALL');
         try{
             const products = await db.Product.findAll();
-            if(products){
+            if(products.length > 0){
                 res.json({
                     products,
                     total: products.length
                 })
+            } else {
+                res.json({
+                    msg:"There is not products in db"
+                })
             }
 
         } catch (error) {
-            return serverError(error);
+            return serverError(error, res);
         }
     },
     store: async (req, res) => {
+        console.log("STORE: ",req.body);
         try {
             const resultValidation = validationResult(req);
 
             if(resultValidation.errors.length > 0){
+                res.json({
+                    errors: resultValidation.errors,
+                })
+            } else {
                 const {
                     name,
                     price,
                     description
                 } = req.body;
-                const { filename } = req.file;
+                // const { filename } = req.file;
                 const newProduct = await db.Product.create({
                     ...req.body,
-                    filename
+                    // filename
                 });
                 res.json({
                     msg: "Product created",
                     newProduct
                 })
-            } else {
-                res.json({
-                    errors: resultValidation.errors,
-                })
             }
             
         } catch (error) {
-            return serverError(error);
+            return serverError(error, res);
         }
+    },
+    update: async (req, res) => {
+        console.log("UPDATE: ", req.body);
+        try {
+            const {
+                name,
+                price,
+                description
+            } = req.body;
+            const id = Number(req.params.id);
+            const resultValidation = validationResult(req);
+            if(resultValidation.errors.length > 0){
+                res.json({
+                    errors: resultValidation.errors,
+                })
+            } else {
+                const newProduct = await db.Product.update({
+                name,
+                price,
+                description
+                }, { where: { id } })
+
+                const updatedProduct = await db.Product.findByPk(id)
+                res.json(updatedProduct)
+            }
+        } catch (error) {
+            return serverError(error, res)
+        }
+    },
+    delete: async (req, res) => {
+        console.log('DELETE');
+        try {
+            const id = Number(req.params.id);
+            await db.Product.destroy({
+                where: {id}
+            })
+            res.json({
+                msg: "Product deleted"
+            })
+        } catch (error) {
+            return serverError(error, res)
+        }
+
     }
 };

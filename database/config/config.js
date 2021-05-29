@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
-    "username": "sequelize",
-    "password": "sequelize",
+    "username": "root", //sequelize
+    "password": null,   //sequelize
     "database": "aenima",
     "host": "127.0.0.1",
     "dialect": "mysql"
