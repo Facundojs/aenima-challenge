@@ -5,10 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aenima challenge</title>
+    <link rel="stylesheet" href="/public/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/styles/styles.css">
+    <link rel="stylesheet" href="/public/styles/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
-<body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+<body class="container-fluid p-0 h-100">
+    <header>
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+            <div class="container-sm justify-content-center">
+                <div class="w-50 navbar-nav d-flex justify-content-around">
+                    <div class="nav-link btn" id="add-product">
+                        Add product
+                    </div>
+                    <div class="nav-link" id="header-total">
+                        Total products: 
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="mt-5 container-xxl text-center d-flex flex-column justify-content-center align-content-center flex-wrap">
+        <h1 class="p-3">Catálogo</h1>
+        <section class="container-fluid">
+            <h2>All products</h2>
+            <div class="container-fluid d-flex justify-content-center flex-wrap" id="product-list">
+                
+            </div>
+        </section>
+
+        <hr>
+        <div class="store-modal position-absolute bg-success" style="display: none;" id="store-form-modal">
+            <p class="btn" id="close-modal">Cerrar</p>
+            <form 
+                onsubmit="return apiStoreProduct()"
+                id="store-form" 
+                method="post" 
+                enctype="multipart/form-data" 
+                >
+                <input type="text" name="name">
+                <input type="number" name="price">
+                <input type="text" name="description">
+                <input type="file" name="image" id="">
+                <button id="store-form-submit">Submit</button>
+            </form>
+            <div id="store-validations">
+
+            </div>
+        </div>
+    </main>
+    <footer class="sticky-footer bg-white w-75">
+        <hr>
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Aenima 2021</span>
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="/public/javascript/renderProducts.js"></script>
 </html>

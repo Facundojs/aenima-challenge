@@ -30,7 +30,8 @@ module.exports = {
         }
     },
     store: async (req, res) => {
-        console.log("STORE: ",req.body);
+        console.log("STORE BODY: ",req.body);
+        console.log("STORE FILE: ",req.file);
         try {
             const resultValidation = validationResult(req);
 
@@ -39,15 +40,9 @@ module.exports = {
                     errors: resultValidation.errors,
                 })
             } else {
-                const {
-                    name,
-                    price,
-                    description
-                } = req.body;
-                // const { filename } = req.file;
                 const newProduct = await db.Product.create({
                     ...req.body,
-                    // filename
+                    image: req.file.filename
                 });
                 res.json({
                     msg: "Product created",
