@@ -34,8 +34,8 @@
             </div>
         </section>
 
-        <hr>
-        <div class="store-modal position-absolute bg-success" style="display: none;" id="store-form-modal">
+        <!-- STORE MODAL -->
+        <!-- <div class="store-modal position-absolute bg-success" style="display: none;" id="store-form-modal">
             <p class="btn" id="close-modal">Cerrar</p>
             <form 
                 onsubmit="return apiStoreProduct()"
@@ -52,9 +52,146 @@
             <div id="store-validations">
 
             </div>
-        </div>
+        </div> -->
+
+
+        <!-- STORE MODAL TEST     -->
+
+        <div  class="modal store-modal" style="display: none;" id="store-form-modal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Store product</h5>
+                  <button type="button" class="btn-close" id="close-modal" aria-label="Close">
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form 
+                    onsubmit="return apiStoreProduct()"
+                    id="store-form" 
+                    method="post" 
+                    enctype="multipart/form-data" 
+                    class="d-flex flex-column 
+                    justify-content-center 
+                    align-content-center 
+                    align-items-center 
+                    flex-wrap"
+                    >
+                    <input type="text" name="name">
+                    <input type="number" name="price">
+                    <input type="text" name="description">
+                    <input type="file" name="image" id="">
+                    <button id="store-form-submit">Submit</button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <div id="store-validations">
+
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <!-- EDIT MODAL -->
+        
+        
+        <div id="edit-form-modal" class="edit-modal position-absolute" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit product</h5>
+                  <button type="button" class="btn-close"  id="close-edit-modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form 
+                        onsubmit="return apiEditProduct()"
+                        id="edit-form" 
+                        method="post" 
+                        enctype="multipart/form-data"
+                        class="d-flex flex-column 
+                            justify-content-center 
+                            align-content-center 
+                            align-items-center 
+                            flex-wrap" 
+                        >
+        
+
+                        <input  type="text" class="form-control" id="edit-name"
+                            placeholder="First name" name="name"/>
+                        <label for="edit-name">Name</label>
+
+
+                        <input  type="number" class="form-control" id="edit-price"
+                            placeholder="Price" name="price"/>
+                        <label for="edit-price">Price</label>
+
+    
+
+                        <input  type="textarea" class="form-control" id="edit-description"
+                            placeholder="Description" name="description"/>
+                        <label for="edit-description">Description</label>
+
+
+                        <input type="file" class="custom-file-input" id="customFile" name="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+
+                        <hr>
+                        <div>
+
+                            <button type="button" id="close-edit-modal-close" class="btn btn-secondary">Close</button>
+                            <button type="submit" id="submit-edit" 
+                            onclick="return apiEditProduct()"
+                            class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     </main>
-    <footer class="sticky-footer bg-white w-75">
+    <footer class="sticky-footer bg-white w-75 mt-5">
         <hr>
         <div class="container my-auto">
             <div class="copyright text-center my-auto">

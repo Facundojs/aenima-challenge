@@ -55,7 +55,7 @@ module.exports = {
         }
     },
     update: async (req, res) => {
-        console.log("UPDATE: ", req.body);
+        console.log("UPDATE: ", req.params.id);
         try {
             const {
                 name,
@@ -65,6 +65,7 @@ module.exports = {
             const id = Number(req.params.id);
             const resultValidation = validationResult(req);
             if(resultValidation.errors.length > 0){
+                console.log(resultValidation.errors);
                 res.json({
                     errors: resultValidation.errors,
                 })
@@ -72,7 +73,8 @@ module.exports = {
                 const newProduct = await db.Product.update({
                 name,
                 price,
-                description
+                description,
+                image: req.file.filename ? req.file.filename : '' 
                 }, { where: { id } })
 
                 const updatedProduct = await db.Product.findByPk(id)

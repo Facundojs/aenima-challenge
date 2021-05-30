@@ -1,6 +1,7 @@
 const GET_ALL_URL = "http://localhost:3010/api/v1/products/getall";
 const POST_URL = "http://localhost:3010/api/v1/products/store";
 const DELETE_URL = "http://localhost:3010/api/v1/products/delete/";
+const UPDATE_URL = "http://localhost:3010/api/v1/products/update/";
 
 const productList = document.querySelector("#product-list");
 function apiGetProducts(url) {
@@ -18,7 +19,7 @@ function apiGetProducts(url) {
                     productList.innerHTML += `
                         <div class="card m-2">
                             <img src="https://picsum.photos/id/404/367/267"/>
-                            <h3>${element.name} - $${element.price}</h3>
+                            <h3><span>${element.name}</span> - $<span>${element.price}</span></h3>
                             <div class="focus-content">
                                 <p>${element.description}.<br/>
                                 <i id="${element.id}" deleteButton class="fas fa-trash btn"></i>
@@ -33,12 +34,10 @@ function apiGetProducts(url) {
             }
         })
 }
-
 window.addEventListener('load', apiGetProducts(GET_ALL_URL))
 
 const storeForm = document.querySelector("#store-form");
 const storeValidations = document.querySelector("#store-validations");
-const storeFormSubmit = document.querySelector("#store-form-submit");
 
 function apiStoreProduct() {
     storeValidations.innerHTML = ""
@@ -51,6 +50,7 @@ function apiStoreProduct() {
     .then((res)=> res.json())
         .then((resp) => {
             console.log(resp)
+            storeForm.reset()
             if (resp.errors) {
                 resp.errors.forEach((element) => {
                     storeValidations.innerHTML += `
@@ -79,13 +79,17 @@ closeStoreForm.addEventListener('click', function () {
 });
 
 // Delete 
-
+let modalIdProduct = null;
 productList.addEventListener('click', (e) => {
     switch (e.target.classList[1]) {
         case "fa-trash":
             deleteProduct(DELETE_URL, e.target.id)
                 ; break;
-        case "fa-pen": console.log('pen'); break;
+        case "fa-pen":
+            modalIdProduct = e.target.id
+            console.log(modalIdProduct);
+            openEditModal(e.target)
+            ; break;
     }
 })
 
@@ -96,5 +100,40 @@ function deleteProduct(url, id) {
     }).then(() => {
         apiGetProducts(GET_ALL_URL)
     })
+    
+}
+
+// Edit 
+
+function openEditModal(target) {
+    formModalEdit.style.display = 'block'
+    seedModal(target)
+}
+function seedModal(target) {
+    document.querySelector('#edit-name').value = target.offsetParent.childNodes[3].childNodes[0].textContent.trim();
+    document.querySelector('#edit-price').value = target.offsetParent.childNodes[3].childNodes[2].textContent.trim();
+    document.querySelector('#edit-description').value = target.parentElement.textContent.trim()
+}
+const formModalEdit = document.querySelector('#edit-form-modal');
+const closeEditForm = document.querySelector('#close-edit-modal');
+const closeEditFormButton = document.querySelector('#close-edit-modal-close');
+const editForm = document.querySelector('#edit-form');
+
+closeEditForm.addEventListener('click', function () {  
+    formModalEdit.style.display = 'none'; //Crear funcion cerrar edit modal
+});
+closeEditFormButton.addEventListener('click', function () {  
+    formModalEdit.style.display = 'none'; //Crear funcion cerrar edit modal
+});
+
+
+function apiEditProduct() {
+    const finalUrl = UPDATE_URL + modalIdProduct
     console.log(finalUrl);
+    const formData = new FormData(editForm)
+    fetch(finalUrl, {
+        method: "PUT",
+        body: formData
+    })
+    return false;
 }
