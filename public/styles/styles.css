@@ -1,3 +1,6 @@
+body{
+    background-image: url(/public/images/unnamed.jpg);
+}
 .card {
     width: 300px;
     height: 280px;
@@ -44,4 +47,7 @@ margin-top: -80px;
 
 .card:hover h3, .card:focus-within h3 {
 padding: 8px 12px 0;
+}
+.font-white{
+    color: aliceblue;
 }

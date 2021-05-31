@@ -11,7 +11,7 @@ module.exports = [
 		let file = req.file;
 		let acceptedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
 
-		if (!file) {
+		if (file) {
             let fileExtension = path.extname(file.originalname);
             if (!acceptedExtensions.includes(fileExtension)) {
                 throw new Error(`Extensions accepted are ${acceptedExtensions.join(', ')}`);

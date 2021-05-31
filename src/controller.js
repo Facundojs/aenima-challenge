@@ -63,7 +63,9 @@ module.exports = {
                 description
             } = req.body;
             const id = Number(req.params.id);
+            const productToUpdate = await db.Product.findByPk(id)
             const resultValidation = validationResult(req);
+            console.log(resultValidation);
             if(resultValidation.errors.length > 0){
                 console.log(resultValidation.errors);
                 res.json({
@@ -74,7 +76,7 @@ module.exports = {
                 name,
                 price,
                 description,
-                image: req.file.filename ? req.file.filename : '' 
+                image: req.file ? req.file.filename : productToUpdate.image 
                 }, { where: { id } })
 
                 const updatedProduct = await db.Product.findByPk(id)

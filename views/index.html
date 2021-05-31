@@ -25,37 +25,27 @@
             </div>
         </nav>
     </header>
-    <main class="mt-5 container-xxl text-center d-flex flex-column justify-content-center align-content-center flex-wrap">
-        <h1 class="p-3">Catálogo</h1>
-        <section class="container-fluid">
+    <main class="position-relative mt-5 container-xxl text-center d-flex flex-column justify-content-center align-content-center flex-wrap">
+        <h1 class="p-5 font-white">Catálogo</h1>
+
+
+        <section class="container-fluid d-flex flex-column align-items-center align-content-center bg-secondary rounded p-3">
             <h2>All products</h2>
+            <div class="input-group rounded w-50 m-3">
+                <input 
+                    type="search" id="search-bar" class="form-control rounded" 
+                    placeholder="Search products" aria-label="Search"
+                    aria-describedby="search-addon" 
+                />
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="fas fa-search"></i>
+                </span>
+            </div>
             <div class="container-fluid d-flex justify-content-center flex-wrap" id="product-list">
-                
             </div>
         </section>
 
-        <!-- STORE MODAL -->
-        <!-- <div class="store-modal position-absolute bg-success" style="display: none;" id="store-form-modal">
-            <p class="btn" id="close-modal">Cerrar</p>
-            <form 
-                onsubmit="return apiStoreProduct()"
-                id="store-form" 
-                method="post" 
-                enctype="multipart/form-data" 
-                >
-                <input type="text" name="name">
-                <input type="number" name="price">
-                <input type="text" name="description">
-                <input type="file" name="image" id="">
-                <button id="store-form-submit">Submit</button>
-            </form>
-            <div id="store-validations">
-
-            </div>
-        </div> -->
-
-
-        <!-- STORE MODAL TEST     -->
+        <!-- STORE MODAL TEST  -->
 
         <div  class="modal store-modal" style="display: none;" id="store-form-modal">
             <div class="modal-dialog" role="document">
@@ -84,58 +74,15 @@
                     <button id="store-form-submit">Submit</button>
                 </form>
                 </div>
-                <div class="modal-footer">
-                    <div id="store-validations">
-
-                    </div>
+                <div id="store-validations" class="modal-footer">
+                    
                 </div>
               </div>
             </div>
           </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
         <!-- EDIT MODAL -->
-        
-        
+            
         <div id="edit-form-modal" class="edit-modal position-absolute" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -174,11 +121,9 @@
 
 
                         <input type="file" class="custom-file-input" id="customFile" name="image">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <label class="custom-file-label" for="customFile">If you don't select a new file, the image will be the old one</label>
 
-                        <hr>
                         <div>
-
                             <button type="button" id="close-edit-modal-close" class="btn btn-secondary">Close</button>
                             <button type="submit" id="submit-edit" 
                             onclick="return apiEditProduct()"
@@ -186,16 +131,19 @@
                         </div>
                     </form>
                 </div>
+                <div class="modal-footer" id="edit-validations">
+
+                </div>
               </div>
             </div>
           </div>
           
     </main>
-    <footer class="sticky-footer bg-white w-75 mt-5">
+    <footer class="sticky-footer w-75 m-5">
         <hr>
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Aenima 2021</span>
+                <span class="h3 font-white">Copyright &copy; Aenima 2021</span>
             </div>
         </div>
     </footer>
