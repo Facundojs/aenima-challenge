@@ -67,15 +67,43 @@
                     align-items-center 
                     flex-wrap"
                     >
-                    <input type="text" name="name">
-                    <input type="number" name="price">
-                    <input type="text" name="description">
-                    <input type="file" name="image" id="">
-                    <button id="store-form-submit">Submit</button>
+                    <label for="edit-name" class="d-flex align-items-center w-75 m-2">
+                        <span class="w-25">Name</span>
+                        <input  type="text" class="form-control w-75"
+                        placeholder="First name" name="name"/>
+                    </label>
+
+                    <label for="edit-price" class="d-flex align-items-center w-75 m-2">
+                        <span class="w-25">Price</span>
+                        <input  type="number" class="form-control w-75"
+                        placeholder="Price" name="price"/>
+                    </label>
+
+                    <label for="edit-description" class="d-flex align-items-center w-75 m-2">
+                        <span class="w-25">Description</span>
+                        <input  type="textarea" class="form-control w-75"
+                            placeholder="Description" name="description"/>
+                    </label>
+
+                    <label class="d-flex align-items-center w-75 m-4" for="customFile">
+                        <span class="w-50" >
+                            Select an image
+                        </span>
+                        <input type="file"  style="color: transparent" class="custom-file-input w-50" id="customFile" name="image">
+                    </label>
+                    <div>
+                        <button type="button" id="close-store-modal" class="btn btn-secondary">Close</button>
+                        <!-- <button type="submit" id="submit-edit" 
+                        onclick="return apiEditProduct()"
+                        class="btn btn-primary">Save changes</button> -->
+                        <button id="store-form-submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </form>
                 </div>
-                <div id="store-validations" class="modal-footer">
-                    
+                <div class="modal-footer p-4">
+                    <div id="store-validations" class="d-flex margin-auto flex-wrap">
+
+                    </div>
                 </div>
               </div>
             </div>
@@ -83,7 +111,7 @@
 
         <!-- EDIT MODAL -->
             
-        <div id="edit-form-modal" class="edit-modal position-absolute" style="display: none;">
+        <div id="edit-form-modal" class="edit-modal modal" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -103,23 +131,15 @@
                             flex-wrap" 
                         >
         
-
                         <input  type="text" class="form-control" id="edit-name"
                             placeholder="First name" name="name"/>
                         <label for="edit-name">Name</label>
-
-
                         <input  type="number" class="form-control" id="edit-price"
                             placeholder="Price" name="price"/>
                         <label for="edit-price">Price</label>
-
-    
-
                         <input  type="textarea" class="form-control" id="edit-description"
                             placeholder="Description" name="description"/>
                         <label for="edit-description">Description</label>
-
-
                         <input type="file" class="custom-file-input" id="customFile" name="image">
                         <label class="custom-file-label" for="customFile">If you don't select a new file, the image will be the old one</label>
 
@@ -131,8 +151,10 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer" id="edit-validations">
+                <div class="modal-footer p-4">
+                    <div id="edit-validations" class="d-flex margin-auto align-items-center flex-wrap">
 
+                    </div>
                 </div>
               </div>
             </div>

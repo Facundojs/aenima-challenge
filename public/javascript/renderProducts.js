@@ -18,7 +18,7 @@ function apiGetProducts(url) {
                 itemsRendered = products.products;
                 products.products.forEach(element => {
                     productList.innerHTML += `
-                        <div class="card m-2">
+                        <div class="card m-2" id="card-${element.id}">
                             <img src="../public/images/${element.image}">
                             <h3 class="border-top"><span class="h5">${element.name}</span> - $<span>${element.price}</span></h3>
                             <div class="focus-content">
@@ -49,16 +49,17 @@ function apiStoreProduct() {
     fetch(POST_URL, fetchConfig)
     .then((res)=> res.json())
         .then((resp) => {
-            storeForm.reset()
             if (resp.errors) {
                 resp.errors.forEach((element) => {
                     storeValidations.innerHTML += `
-                    <div>${element.msg}</div>
+                    <span class="w-50 p-2">${element.msg}</span>
                     `
                 })
                 return false
+            } else {
+                storeForm.reset()
+                return false
             }
-            return false
         })
     return false;
 }
@@ -68,6 +69,7 @@ function apiStoreProduct() {
 const formModal = document.querySelector('#store-form-modal');
 const showStoreForm = document.querySelector('#add-product');
 const closeStoreForm = document.querySelector('#close-modal');
+const closeStoreModalButton = document.querySelector('#close-store-modal');
 
 function openStoreModal() {
     formModal.style.display = 'block';
@@ -76,6 +78,9 @@ function closeStoreModal() {
     formModal.style.display = 'none';
 }
 
+closeStoreModalButton.addEventListener('click', () => {
+    closeStoreModal()
+})
 showStoreForm.addEventListener('click', function () {
     closeEditModal()
     openStoreModal()
@@ -111,6 +116,17 @@ function deleteProduct(url, id) {
 
 // Edit 
 
+function changeCard(id, newName,newPrice, newdesc, newImg) {
+    const cardId = document.querySelector(`#card-${id}`);
+    // console.log("CARD_ID :", cardId);
+    // cardName 
+    cardId.childNodes[3].childNodes[0].textContent = newName;
+    // cardPrice =
+    cardId.childNodes[3].childNodes[2].textContent = newPrice;
+    // cardDesc =
+    cardId.childNodes[5].childNodes[1].childNodes[0].textContent = newdesc;
+}
+
 function openEditModal(target) {
     formModalEdit.style.display = 'block';
     seedModal(target);
@@ -141,6 +157,10 @@ function apiEditProduct() {
     editValidations.innerHTML = "";
     const finalUrl = UPDATE_URL + modalIdProduct;
     const formData = new FormData(editForm);
+    const newName = formData.get("name");
+    const newPrice = formData.get("price");
+    const newDescription = formData.get("description");
+
     fetch(finalUrl, {
         method: "PUT",
         body: formData
@@ -150,10 +170,11 @@ function apiEditProduct() {
             if (response.errors) {
                 response.errors.forEach((element) => {
                     editValidations.innerHTML += `
-                    <div>${element.msg}</div>
+                    <span class="w-50 p-2">${element.msg}</span>
                     `
                 });
             } else {
+                changeCard(modalIdProduct, newName, newPrice, newDescription)
                 closeEditModal();
             };
     })
