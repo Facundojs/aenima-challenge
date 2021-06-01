@@ -19,4 +19,6 @@
 
     npm run startdev
 
+## Front End    
 
+    Para poder usar la aplicación, abrir en el navegador el archivo INDEX.HTML de la carpeta views.
