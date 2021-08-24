@@ -1,5 +1,8 @@
 # Aenima challenge
 
+Una aplicación con CRUD de javascript vanilla client-side.
+Express, sequelize y MYSQL server-side.
+
  Para poder utilizar correctamente el proyecto deberememos
 
  - Instalar las dependencías
